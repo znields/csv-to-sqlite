@@ -24,5 +24,8 @@
     "sass-loader": "^7.0.3",
     "webpack": "^3.12.0",
     "webpack-dev-server": "^2.11.2"
+  },
+  "dependencies": {
+    "@material/top-app-bar": "^0.36.1"
   }
 }
