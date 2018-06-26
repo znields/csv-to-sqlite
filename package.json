@@ -16,16 +16,10 @@
   "author": "isaiahnields",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "^0.28.11",
     "electron": "^2.0.0",
-    "extract-loader": "^2.0.1",
-    "file-loader": "^1.1.11",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.3",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.2"
+    "extract-loader": "^2.0.1"
   },
   "dependencies": {
-    "@material/top-app-bar": "^0.36.1"
+    "child_process": "^1.0.2"
   }
 }

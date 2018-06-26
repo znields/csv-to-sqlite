@@ -1,0 +1,9 @@
+.bottom-right {
+    position:absolute;
+    right:20px;
+    bottom:20px;
+}
+
+.input--file {
+    width: 20px;
+}

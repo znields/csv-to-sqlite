@@ -1,29 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="UTF-8">
 
+      <link rel="stylesheet" href="style/materialize.css">
+      <link rel="stylesheet" href="style/index.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="resources/js/index.js"></script>
-    <link rel="stylesheet" href="resources/css/index.css">
+      <script src="style/materialize.js"></script>
+      <script src="renderer.js"></script>
 
+    <title>SQL Importer</title>
 
-
-
-    <title>SQLImporter</title>
   </head>
-  <body>
-  <header class="mdc-top-app-bar">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
-        <span class="mdc-top-app-bar__title">SQLImporter</span>
-      </section>
-    </div>
-  </header>
 
-    <script>
-      require('./renderer.js')
-    </script>
+  <body>
+
+  <nav class="nav-extended">
+      <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Logo</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+      </div>
+      <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+              <li class="tab"><a href="#test1">Test 1</a></li>
+              <li class="tab"><a class="active" href="#test2">Test 2</a></li>
+              <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
+              <li class="tab"><a href="#test4">Test 4</a></li>
+          </ul>
+      </div>
+  </nav>
+
+      <div>
+
+          <div class="input-field col s6 center">
+
+              <input placeholder="File location" id="file_location" class="input--file" type="text">
+
+              <a class="waves-effect waves-light btn-small">Choose...</a>
+
+          </div>
+
+      </div>
+
+      <div class="bottom-right">
+
+          <button class="btn waves-effect waves-light" type="submit" name="action" onclick="convert()">
+
+              Convert
+              <i class="material-icons right">loop</i>
+
+          </button>
+
+      </div>
+
+
+
   </body>
+
 </html>
