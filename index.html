@@ -18,28 +18,32 @@
   <body>
 
   <nav class="nav-extended">
+
       <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Logo</a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+          <a class="brand-logo">SQL Importer</a>
 
       </div>
+
       <div class="nav-content">
+
           <ul class="tabs tabs-transparent">
-              <li class="tab"><a href="#test1">Test 1</a></li>
-              <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-              <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
-              <li class="tab"><a href="#test4">Test 4</a></li>
+
+              <li class="tab"><a class="active">Table 1</a></li>
+
           </ul>
+
       </div>
+      
   </nav>
 
       <div>
 
           <div class="input-field col s6 center">
 
-              <input placeholder="File location" id="file_location" class="input--file" type="text">
+              <input placeholder="File location" id="file_location" style="width: 50%; margin-right: 20px; max-width: 750px;" type="text">
 
-              <a class="waves-effect waves-light btn-small">Choose...</a>
+              <a class="waves-effect waves-light btn-small" onclick="chooseFile()">Choose...</a>
 
           </div>
 

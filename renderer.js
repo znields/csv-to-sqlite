@@ -22,8 +22,17 @@ function convert() {
 
 }
 
+function chooseFile() {
+    
+    const {dialog} = require('electron').remote;
+    document.getElementById('file_location').value = dialog.showOpenDialog({properties: ['openFile', ],
+        filters: [
+            {name: 'Comma-separated values', extensions: ['csv']},
+        ]
+    });
+    
+}
 
 
 
-// const {dialog} = require('electron').remote
-// console.log(dialog.showOpenDialog({properties: ['openFile']}));
+
