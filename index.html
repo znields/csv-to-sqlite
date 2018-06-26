@@ -1,67 +1,81 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!doctype html>
 
-    <meta charset="UTF-8">
+<html lang="en">
+<head>
 
-      <link rel="stylesheet" href="style/materialize.css">
-      <link rel="stylesheet" href="style/index.css">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="utf-8">
 
-      <script src="style/materialize.js"></script>
-      <script src="renderer.js"></script>
+    <link rel="stylesheet" href="css/material-components-web.min.css">
+    <link rel="stylesheet" href="css/index.css">
 
-    <title>SQL Importer</title>
+    <script src="js/material-components-web.min.js"></script>
+    <script src="js/index.js"></script>
 
-  </head>
+    <title>CSV to SQL Converter</title>
 
-  <body>
+</head>
 
-  <nav class="nav-extended">
+<body>
 
-      <div class="nav-wrapper">
+    <div>
 
-          <a class="brand-logo">SQL Importer</a>
+        <header class="mdc-toolbar mdc-toolbar--fixed">
 
-      </div>
+            <div class="mdc-toolbar__row">
 
-      <div class="nav-content">
+                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
 
-          <ul class="tabs tabs-transparent">
+                    <span class="mdc-toolbar__title">Tables</span>
 
-              <li class="tab"><a class="active">Table 1</a></li>
+                </section>
 
-          </ul>
+            </div>
 
-      </div>
-      
-  </nav>
+        </header>
 
-      <div>
+        <main class="mdc-toolbar-fixed-adjust"></main>
 
-          <div class="input-field col s6 center">
-
-              <input placeholder="File location" id="file_location" style="width: 50%; margin-right: 20px; max-width: 750px;" type="text">
-
-              <a class="waves-effect waves-light btn-small" onclick="chooseFile()">Choose...</a>
-
-          </div>
-
-      </div>
-
-      <div class="bottom-right">
-
-          <button class="btn waves-effect waves-light" type="submit" name="action" onclick="convert()">
-
-              Convert
-              <i class="material-icons right">loop</i>
-
-          </button>
-
-      </div>
+    </div>
 
 
+    <div>
 
-  </body>
+        <ul class="mdc-list mdc-list--two-line">
+            <li class="mdc-list-item">
+        <span class="mdc-list-item__text">
+          First-line text
+          <span class="mdc-list-item__secondary-text">
+            Second-line text
+          </span>
+        </span>
+            </li>
+        </ul>
+
+    </div>
+
+    <button class="mdc-fab app-fab--absolute" aria-label="Add">
+
+        <span class="mdc-fab__icon material-icons">add</span>
+
+    </button>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</body>
+
+<style>
+    .app-fab--absolute {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    @media(min-width: 1024px) {
+        .app-fab--absolute {
+            bottom: 1.5rem;
+            right: 1.5rem;
+        }
+    }
+</style>
 
 </html>
