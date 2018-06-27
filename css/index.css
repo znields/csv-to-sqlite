@@ -1,9 +1,0 @@
-@import "@material/animation/variables";
-
-body {
-    margin: 0 0;
-}
-
-.my-element--animating {
-    animation: foo-keyframe 175ms $mdc-animation-standard-curve-timing-function;
-}

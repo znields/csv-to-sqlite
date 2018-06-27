@@ -4,12 +4,14 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/material-components-web.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-orange.min.css" />
+    <link rel="stylesheet" href="index.css">
 
-    <script src="js/material-components-web.min.js"></script>
-    <script src="js/index.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="index.js"></script>
 
     <title>CSV to SQL Converter</title>
 
@@ -17,65 +19,86 @@
 
 <body>
 
-    <div>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Tables</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Settings</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">
 
-        <header class="mdc-toolbar mdc-toolbar--fixed">
+                <div id="list-container">
 
-            <div class="mdc-toolbar__row">
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                            <td>example/path/to/file/my/name/is/isaiah</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                            <td>10</td>
+                        </tr>
 
-                <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                        </tbody>
+                    </table>
 
-                    <span class="mdc-toolbar__title">Tables</span>
+                    <button id="save-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent">
 
-                </section>
+                        <i class="material-icons">import_export</i>
+
+                    </button>
+
+                    <button id="add-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="add()">
+
+                        <i class="material-icons">add</i>
+
+                    </button>
+
+                </div>
+
+                <div id="table-container" align="center">
+
+                    <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="table-name">
+                            <label class="mdl-textfield__label" for="table-name">Table Name</label>
+                        </div>
+
+                        <br>
+
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="path-to-csv">
+                            <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
+                        </div>
+
+                    </form>
+
+                </div>
 
             </div>
-
-        </header>
-
-        <main class="mdc-toolbar-fixed-adjust"></main>
-
+        </main>
     </div>
 
-
-    <div>
-
-        <ul class="mdc-list mdc-list--two-line">
-            <li class="mdc-list-item">
-        <span class="mdc-list-item__text">
-          First-line text
-          <span class="mdc-list-item__secondary-text">
-            Second-line text
-          </span>
-        </span>
-            </li>
-        </ul>
-
-    </div>
-
-    <button class="mdc-fab app-fab--absolute" aria-label="Add">
-
-        <span class="mdc-fab__icon material-icons">add</span>
-
-    </button>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </body>
-
-<style>
-    .app-fab--absolute {
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-    }
-
-    @media(min-width: 1024px) {
-        .app-fab--absolute {
-            bottom: 1.5rem;
-            right: 1.5rem;
-        }
-    }
-</style>
-
 </html>
