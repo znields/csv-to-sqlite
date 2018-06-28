@@ -26,6 +26,10 @@ body {
     height: 100%;
 }
 
+.mdl-textfield {
+    margin-right: 15px;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }

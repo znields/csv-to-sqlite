@@ -36,28 +36,15 @@
             </nav>
         </div>
         <main class="mdl-layout__content">
+
             <div class="page-content">
 
                 <div id="list-container">
 
                     <table class="mdl-data-table mdl-js-data-table">
-                        <tbody>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-                            <td>example/path/to/file/my/name/is/isaiah</td>
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-                            <td>50</td>
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-                            <td>10</td>
-                        </tr>
+                        <tbody id="tables-list-body">
+
+
 
                         </tbody>
                     </table>
@@ -68,7 +55,7 @@
 
                     </button>
 
-                    <button id="add-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="add()">
+                    <button id="add-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
 
                         <i class="material-icons">add</i>
 
@@ -84,14 +71,40 @@
                             <label class="mdl-textfield__label" for="table-name">Table Name</label>
                         </div>
 
-                        <br>
-
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="text" id="path-to-csv">
                             <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
                         </div>
 
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            Choose...
+                        </button>
+
                     </form>
+
+
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric">Column Name</th>
+                            <th>Data Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                            <td>10</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
                 </div>
 
