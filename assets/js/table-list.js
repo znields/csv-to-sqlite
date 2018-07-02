@@ -3,7 +3,7 @@ const fs = require('fs');
 const storage = require('electron-json-storage');
 const {dialog} = require('electron').remote;
 
-storage.setDataPath(os.tmpdir() + "/com.isaiahnields.CSV -> SQL");
+
 
 // loads tables into the tables list
 function loadTables()
@@ -33,6 +33,9 @@ function addTableRow(tableData)
     // creates table row
     const tableRow = document.createElement('tr');
 
+    // adds an event listener to table row
+    tableRow.addEventListener('click', function (element) {showTable(element.target.parentNode.firstChild.innerText);});
+
     // creates table name
     const tableName = document.createElement('td');
     tableName.innerText = tableData['tableName'];
@@ -50,27 +53,71 @@ function addTableRow(tableData)
     document.getElementById('tables-list-body').appendChild(tableRow);
 }
 
-// adds or edits an existing table
-function showTable(tableName)
+// shows the table editor and hide the table list
+function loadTableEditor(tableData)
 {
-    if (!tableName) document.getElementsByClassName('mdl-layout-title')[0].innerHTML = 'New Table';
+    // show the table editor container and save button
+    document.getElementById('table-editor-container').style.display = 'block';
+    document.getElementById('save-button').style.display = 'block';
 
-    document.getElementById('table-container').style.display = 'block';
-    document.getElementById('list-container').style.display = 'none';
+    // hide the table list container
+    document.getElementById('table-list-container').style.display = 'none';
+
+    const tableName = document.getElementById('table-name');
+    const pathToCSV = document.getElementById('path-to-csv');
+
+    // if loading an existing table
+    if (tableData)
+    {
+        // load in the data
+        tableName.value = tableData['tableName'];
+        pathToCSV.value = tableData['pathToCSV'];
+
+        // remove the hint text from the inputs
+        tableName.parentNode.classList.add('is-dirty');
+        pathToCSV.parentNode.classList.add('is-dirty');
+    }
+    else
+    {
+        tableName.value = '';
+        pathToCSV.value = '';
+
+        tableName.parentNode.classList.remove('is-dirty');
+        pathToCSV.parentNode.classList.remove('is-dirty');
+    }
 }
 
-function test() {
-    storage.set('Test', { tableName: "Test" , pathToCSV: "path/to/csv", columnTypes: { columnName: "hello" } }, function(error) {
-        if (error) throw error;
-    });
-}
-
-
-
-
+/* The functions below are called when buttons are pressed in index.html */
 
 function addTable()
 {
-    showTable();
+    loadTableEditor();
+}
+
+function showTable(tableName)
+{
+    // get the table data from storage
+    storage.get(tableName, function (error, data) {
+
+        if (error) throw error;
+
+        loadTableEditor(data);
+
+    });
+}
+
+function exportTables()
+{
 
 }
+
+// runs when the document loads
+document.addEventListener("DOMContentLoaded", function ()
+{
+    // adds event listeners to the add and export floating action buttons
+    document.getElementById('add-button').addEventListener('click', addTable);
+    document.getElementById('export-button').addEventListener('click', exportTables);
+
+    // loads the tables that the user has created
+    loadTables();
+});

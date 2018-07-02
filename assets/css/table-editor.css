@@ -1,0 +1,11 @@
+.mdl-data-table {
+    width: 100%;
+}
+
+.mdl-textfield {
+    margin-right: 15px;
+}
+
+#save-button {
+    display: none;
+}

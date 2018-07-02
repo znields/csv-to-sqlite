@@ -1,39 +1,43 @@
-<template>
+<div id="table-editor-container" align="center">
 
-    <div id="table-editor" align="center">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="table-name">
+            <label class="mdl-textfield__label" for="table-name">Table Name</label>
+        </div>
 
-        <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="path-to-csv">
+            <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
+        </div>
 
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="table-name">
-                <label class="mdl-textfield__label" for="table-name">Table Name</label>
-            </div>
+        <button id="choose-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Choose...
+        </button>
 
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="path-to-csv">
-                <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
-            </div>
+    <table class="mdl-data-table mdl-js-data-table">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Column Name</th>
+            <th>Data Type</th>
+        </tr>
+        </thead>
+        <tbody>
 
-            <button id="choose-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                Choose...
-            </button>
-
-        </form>
-
-
-        <table class="mdl-data-table mdl-js-data-table">
-            <thead>
             <tr>
-                <th class="mdl-data-table__cell--non-numeric">Column Name</th>
-                <th>Data Type</th>
+                <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                <td>25</td>
             </tr>
-            </thead>
-            <tbody>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                <td>10</td>
+            </tr>
 
+        </tbody>
+    </table>
 
-            </tbody>
-        </table>
+</div>
 
-    </div>
-
-</template>

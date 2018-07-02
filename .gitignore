@@ -63,3 +63,4 @@ typings/
 # ignore webstorm config files
 .idea/
 *.db
+.DS_Store
