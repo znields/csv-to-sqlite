@@ -1,0 +1,39 @@
+<template>
+
+    <div id="table-editor" align="center">
+
+        <form action="#">
+
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="table-name">
+                <label class="mdl-textfield__label" for="table-name">Table Name</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="path-to-csv">
+                <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
+            </div>
+
+            <button id="choose-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Choose...
+            </button>
+
+        </form>
+
+
+        <table class="mdl-data-table mdl-js-data-table">
+            <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Column Name</th>
+                <th>Data Type</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+</template>
