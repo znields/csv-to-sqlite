@@ -1,40 +1,39 @@
-const os = require('os');
-const fs = require('fs');
-const storage = require('electron-json-storage');
-const {dialog} = require('electron').remote;
+const storage = require('./storage');
 
-
+function display(on)
+{
+    document.getElementById('table-list-container').style.display = on ? 'block' : 'none';
+}
 
 // loads tables into the tables list
-function loadTables()
+function loadTables(callback)
 {
     // load all table info from storage
-    storage.getAll(function(error, data)
+    storage.storage.getAll(function(error, data)
     {
         if (error) throw error;
 
         // load all table keys from storage
-        storage.keys(function(error, keys)
+        storage.storage.keys(function(error, keys)
         {
             if (error) throw error;
 
             // for each storage file, add a row to the tables list
             for (const key of keys)
             {
-                addTableRow(data[key]);
+                loadTable(data[key], callback);
             }
         });
     });
 }
 
-// adds a row to the tables list
-function addTableRow(tableData)
+// loads a specific table into the tables list
+function loadTable(tableData, callback)
 {
     // creates table row
     const tableRow = document.createElement('tr');
-
-    // adds an event listener to table row
-    tableRow.addEventListener('click', function (element) {showTable(element.target.parentNode.firstChild.innerText);});
+    tableRow.id = tableData['tableName'];
+    tableRow.classList.add('table-list-row');
 
     // creates table name
     const tableName = document.createElement('td');
@@ -50,74 +49,73 @@ function addTableRow(tableData)
     tableRow.appendChild(pathToCSV);
 
     // append the table row to the tables list
-    document.getElementById('tables-list-body').appendChild(tableRow);
+    document.getElementById('table-list-body').appendChild(tableRow);
 }
 
-// shows the table editor and hide the table list
-function loadTableEditor(tableData)
+// deletes all tables
+function deleteTables()
 {
-    // show the table editor container and save button
-    document.getElementById('table-editor-container').style.display = 'block';
-    document.getElementById('save-button').style.display = 'block';
-
-    // hide the table list container
-    document.getElementById('table-list-container').style.display = 'none';
-
-    const tableName = document.getElementById('table-name');
-    const pathToCSV = document.getElementById('path-to-csv');
-
-    // if loading an existing table
-    if (tableData)
+    // clears storage
+    storage.storage.clear(function (error)
     {
-        // load in the data
-        tableName.value = tableData['tableName'];
-        pathToCSV.value = tableData['pathToCSV'];
+        // get the table list body from index.html
+        const tableListBody = document.getElementById('table-list-body');
 
-        // remove the hint text from the inputs
-        tableName.parentNode.classList.add('is-dirty');
-        pathToCSV.parentNode.classList.add('is-dirty');
-    }
-    else
-    {
-        tableName.value = '';
-        pathToCSV.value = '';
-
-        tableName.parentNode.classList.remove('is-dirty');
-        pathToCSV.parentNode.classList.remove('is-dirty');
-    }
-}
-
-/* The functions below are called when buttons are pressed in index.html */
-
-function addTable()
-{
-    loadTableEditor();
-}
-
-function showTable(tableName)
-{
-    // get the table data from storage
-    storage.get(tableName, function (error, data) {
-
-        if (error) throw error;
-
-        loadTableEditor(data);
-
+        // while the table list body has a child
+        while (tableListBody.firstChild)
+        {
+            // remove the first child
+            tableListBody.removeChild(tableListBody.firstChild);
+        }
     });
 }
 
-function exportTables()
+// deletes the table with the specified name
+function deleteTable(tableName)
 {
+    storage.storage.remove(tableName, function (error)
+    {
+        if (error) throw error;
+
+        // removes the table from index.html
+        document.getElementById(tableName).remove();
+    });
 
 }
 
-// runs when the document loads
-document.addEventListener("DOMContentLoaded", function ()
+// refreshes all tables in table list
+function refreshTables()
 {
-    // adds event listeners to the add and export floating action buttons
-    document.getElementById('add-button').addEventListener('click', addTable);
-    document.getElementById('export-button').addEventListener('click', exportTables);
+    // get the table list body from index.html
+    const tableListBody = document.getElementById('table-list-body');
 
-    // loads the tables that the user has created
+    // while the table list body has a child
+    while (tableListBody.firstChild)
+    {
+        // remove the first child
+        tableListBody.removeChild(tableListBody.firstChild);
+    }
+
     loadTables();
-});
+}
+
+// checks if a table exists
+function isTable(tableName)
+{
+    storage.storage.has(tableName, function (error, hasKey)
+    {
+        if (error) throw error;
+
+        return hasKey;
+    });
+}
+
+
+module.exports = {
+    loadTables: loadTables,
+    deleteTables: deleteTables,
+    deleteTable: deleteTable,
+    refreshTables: refreshTables,
+    isTable: isTable,
+    display: display
+};
