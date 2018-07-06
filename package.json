@@ -20,6 +20,7 @@
     "extract-loader": "^2.0.1"
   },
   "dependencies": {
-    "electron-json-storage": "^4.1.0"
+    "electron-json-storage": "^4.1.0",
+    "firstline": "^2.0.2"
   }
 }

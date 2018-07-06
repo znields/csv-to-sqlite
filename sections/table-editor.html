@@ -6,13 +6,15 @@
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="path-to-csv">
-            <label class="mdl-textfield__label" for="path-to-csv">Path to CSV</label>
+            <input class="mdl-textfield__input" type="text" id="table-path" style="pointer-events: none">
+            <label class="mdl-textfield__label" for="table-path">Path to CSV</label>
         </div>
 
         <button id="choose-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
             Choose...
         </button>
+
+
 
     <table class="mdl-data-table mdl-js-data-table">
         <thead>
@@ -21,20 +23,8 @@
             <th>Data Type</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="table-editor-body">
 
-            <tr>
-                <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-                <td>10</td>
-            </tr>
 
         </tbody>
     </table>

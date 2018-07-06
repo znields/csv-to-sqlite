@@ -1,121 +1,85 @@
 const storage = require('./storage');
 
-function display(on)
-{
-    document.getElementById('table-list-container').style.display = on ? 'block' : 'none';
-}
 
-// loads tables into the tables list
-function loadTables(callback)
+class TableList
 {
-    // load all table info from storage
-    storage.storage.getAll(function(error, data)
+
+    constructor()
     {
-        if (error) throw error;
+        this.rows = [];
 
-        // load all table keys from storage
-        storage.storage.keys(function(error, keys)
-        {
-            if (error) throw error;
+        // constructs a node with the table list html content
+        this.node_ = document.getElementById('table-list-import').import
+            .getElementById('table-list-container')
+            .cloneNode(true);
 
-            // for each storage file, add a row to the tables list
-            for (const key of keys)
-            {
-                loadTable(data[key], callback);
-            }
-        });
-    });
-}
-
-// loads a specific table into the tables list
-function loadTable(tableData, callback)
-{
-    // creates table row
-    const tableRow = document.createElement('tr');
-    tableRow.id = tableData['tableName'];
-    tableRow.classList.add('table-list-row');
-
-    // creates table name
-    const tableName = document.createElement('td');
-    tableName.innerText = tableData['tableName'];
-    tableName.classList.add('mdl-data-table__cell--non-numeric');
-
-    // creates path to table file
-    const pathToCSV = document.createElement('td');
-    pathToCSV.innerText = tableData['pathToCSV'];
-
-    // adds the table name and path to csv to the table row
-    tableRow.appendChild(tableName);
-    tableRow.appendChild(pathToCSV);
-
-    // append the table row to the tables list
-    document.getElementById('table-list-body').appendChild(tableRow);
-}
-
-// deletes all tables
-function deleteTables()
-{
-    // clears storage
-    storage.storage.clear(function (error)
-    {
-        // get the table list body from index.html
-        const tableListBody = document.getElementById('table-list-body');
-
-        // while the table list body has a child
-        while (tableListBody.firstChild)
-        {
-            // remove the first child
-            tableListBody.removeChild(tableListBody.firstChild);
-        }
-    });
-}
-
-// deletes the table with the specified name
-function deleteTable(tableName)
-{
-    storage.storage.remove(tableName, function (error)
-    {
-        if (error) throw error;
-
-        // removes the table from index.html
-        document.getElementById(tableName).remove();
-    });
-
-}
-
-// refreshes all tables in table list
-function refreshTables()
-{
-    // get the table list body from index.html
-    const tableListBody = document.getElementById('table-list-body');
-
-    // while the table list body has a child
-    while (tableListBody.firstChild)
-    {
-        // remove the first child
-        tableListBody.removeChild(tableListBody.firstChild);
+        // adds the node to page content
+        document.getElementById('page-content').appendChild(this.node_);
     }
 
-    loadTables();
-}
 
-// checks if a table exists
-function isTable(tableName)
-{
-    storage.storage.has(tableName, function (error, hasKey)
+    display(on)
     {
-        if (error) throw error;
+        // display this node if on
+        this.node_.style.display = on ? 'block' : 'none';
+    }
 
-        return hasKey;
-    });
+
+    load()
+    {
+        storage.getAll( (error, data) =>
+        {
+            for (const i in data)
+            {
+                this.rows.push(new TableListRow(data[i].name, data[i].path));
+            }
+
+        });
+    }
+
+
+    clear()
+    {
+        // clear any tables if they exist
+        this.rows.forEach((row) => { row.clear(); });
+        this.rows = [];
+
+    }
 }
 
+class TableListRow
+{
 
+    constructor(name, path)
+    {
+        this.name = name;
+        this.path = path;
+
+        // creates the current table HTML by importing the template content
+        this.node_ = document.importNode(document
+            .getElementById('table-list--row-import')
+            .import.querySelector('template')
+            .content.querySelector('tr'), true);
+
+        // add an id to the node
+        this.node_.id = 'table-list--row--' + this.name;
+
+        // sets the inner text of the data entries to the values loaded from storage
+        this.node_.querySelector('.table-list--row-name').innerText = this.name;
+        this.node_.querySelector('.table-list--row-path').innerText = this.path;
+
+        // appends the clone to the table list
+        document.getElementById('table-list-body').appendChild(this.node_);
+    }
+
+
+    clear()
+    {
+        this.node_.remove();
+    }
+}
+
+// exports the table list functions
 module.exports = {
-    loadTables: loadTables,
-    deleteTables: deleteTables,
-    deleteTable: deleteTable,
-    refreshTables: refreshTables,
-    isTable: isTable,
-    display: display
+    TableList: TableList
 };

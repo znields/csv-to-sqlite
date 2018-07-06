@@ -1,71 +1,166 @@
 const storage = require('./storage');
 const {dialog} = require('electron').remote;
+const fs = require('fs');
+const firstLine = require('firstline');
 
 
-function load(tableName)
+class TableEditor
 {
-    storage.storage.get(tableName, function (error, data)
+
+    constructor()
     {
-        if (error) throw error;
+        // initialize table editor variables
+        this.rows = [];
+        this.tableData = {};
 
-        document.getElementById('table-name').value = data['tableName'];
-        document.getElementById('path-to-csv').value = data['pathToCSV'];
-    });
+        // constructs the node
+        this.node_ = document.getElementById('table-editor-import')
+            .import.getElementById('table-editor-container')
+            .cloneNode(true);
+
+        document.getElementById('page-content').appendChild(this.node_);
+
+        // gets the table name and path inputs
+        this.tableName_ = this.node_.querySelector('#table-name');
+        this.tablePath_ = this.node_.querySelector('#table-path');
+
+        // when a change occurs in the inputs, update table data
+        this.tableName_.addEventListener('change', () => this.tableData.name = this.tableName_.value);
+        this.tablePath_.addEventListener('change', () => this.tableData.path = this.tablePath_.value);
+    }
+
+
+    display(on)
+    {
+        // display this node node if on
+        this.node_.style.display = on ? 'block' : 'none';
+
+        // show the save button if on is true
+        document.getElementById('save-button').style.display = on ? 'block' : 'none';
+    }
+
+
+    load(id)
+    {
+        const name = id.substring(17);
+
+        // load the table data based on the id of the table
+        if (name) storage.get(name, (error, data) =>
+        {
+            // set the input values to the table values
+            this.tableName_.value = data.name;
+            this.tablePath_.value = data.path;
+            data.columns = data.columns ? data.columns : {};
+
+            // remove the hints from inputs
+            this.tableName_.parentNode.classList.add('is-dirty');
+            this.tablePath_.parentNode.classList.add('is-dirty');
+
+            // reads the first line of the csv file at the path variable
+            firstLine(data.path).then( (value) =>
+            {
+                // format the first line read from the csv file
+                const columnNames = value.replace(/['"]+/g, '').split(',');
+
+                for (const i of columnNames)
+                {
+                    this.rows.push(new TableEditorRow(i, data.columns[i] ? data.columns[i] : 'blob'));
+                }
+            });
+
+            this.tableData = data;
+
+        });
+    }
+
+
+    save()
+    {
+        for (const i of this.rows)
+        {
+            this.tableData.columns[i.name] = i.type;
+        }
+        storage.set(this.tableData.name, this.tableData, (error) => { if (error) throw error; });
+    }
+
+
+    choose()
+    {
+        // sets the value to the file path
+        this.tablePath_.value = dialog.showOpenDialog({
+            properties: ['openFile', 'openDirectory'],
+            filters: [{name: 'CSV', extensions: ['csv']}]
+        })[0];
+
+        // sets the input to have an is dirty style
+        this.tablePath_.parentNode.classList.add('is-dirty');
+
+        // updates the table data object with the selected CSV
+        this.tableData.path = this.tablePath_.value;
+    }
+
+
+    clear()
+    {
+
+        // clears rows if they exist
+        this.rows.forEach( (row) => { row.clear(); });
+
+        // resets all variables
+        this.tableName_.value = '';
+        this.tablePath_.value = '';
+
+        this.tableName_.parentNode.classList.remove('is-dirty');
+        this.tablePath_.parentNode.classList.remove('is-dirty');
+
+        this.rows = [];
+        this.tableData = {};
+
+        // clears the
+        this.tableData = {};
+    }
+
 }
 
-function choose()
+class TableEditorRow
 {
-    // prompts the user to choose a CSV file
-    const filePath = dialog.showOpenDialog({
-        properties: ['openFile', 'openDirectory'],
-        filters: [{name: 'CSV', extensions: ['csv']}]
-    });
 
-    // retrieves the path-to-csv input
-    const pathToCSV = document.getElementById('path-to-csv');
+    constructor(name, type)
+    {
+        this.name = name;
+        this.type = type;
 
-    // sets the value to the file path
-    pathToCSV.value = filePath;
+        // constructs the node based on the table editor row template
+        this.node_ = document.importNode(document
+            .getElementById('table-editor--row-import')
+            .import.querySelector('template')
+            .content.querySelector('tr'), true);
 
-    // sets the input to have an is dirty style
-    pathToCSV.parentNode.classList.add('is-dirty');
+        // sets up the node with the input values
+        this.node_.id = 'table-editor--row--' + this.name;
+        this.node_.querySelector('.table-editor--row-name').innerText = this.name;
+        this.node_.querySelector('.table-editor--row-type').value = this.type;
+
+        // adds an event listener to update the rows if a type is changed
+        this.node_.querySelector('.table-editor--row-type').addEventListener('change', () =>
+        {
+            this.type = this.node_.querySelector('.table-editor--row-type').value;
+        });
+
+        // loads the node into the page
+        document.getElementById('table-editor-body').appendChild(this.node_);
+    }
+
+    // removes the node from the page
+    clear()
+    {
+        this.node_.remove();
+    }
 }
 
-function save()
-{
-    const packet = {};
-    packet['tableName'] = document.getElementById('table-name').value;
-    packet['pathToCSV'] = document.getElementById('path-to-csv').value;
 
-    storage.storage.set(packet['tableName'], packet, function () {});
-}
 
-// clears the table editor
-function clear()
-{
-    // retrieves the inputs for the table editor
-    const tableName = document.getElementById('table-name');
-    const pathToCSV = document.getElementById('path-to-csv');
-
-    // sets the value of the inputs to an empty string
-    tableName.value = '';
-    pathToCSV.value = '';
-
-    // resets the hints for the inputs
-    tableName.parentNode.classList.remove('is-dirty');
-    pathToCSV.parentNode.classList.remove('is-dirty');
-}
-
-function display(on)
-{
-    document.getElementById('table-editor-container').style.display = on ? 'block' : 'none';
-    document.getElementById('save-button').style.display = on ? 'block' : 'none';
-}
-
+// exports the table editor functions
 module.exports = {
-    choose: choose,
-    save: save,
-    load: load,
-    display: display,
-    clear: clear
+    TableEditor: TableEditor
 };
