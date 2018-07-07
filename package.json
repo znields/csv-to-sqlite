@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "electron-json-storage": "^4.1.0",
-    "firstline": "^2.0.2"
+    "firstline": "^2.0.2",
+    "sqlite3": "^4.0.1"
   }
 }

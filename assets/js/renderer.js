@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () =>
 
     document.getElementById('add-button').addEventListener('click', () =>
     {
+        tableEditor.add('table-' + tableList.rows.length);
+
         tableList.display(false);
         tableEditor.display(true);
     });
@@ -45,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () =>
     document.getElementById('save-button').addEventListener('click', () =>
     {
         tableEditor.save();
-        tableEditor.clear()
+        tableEditor.clear();
 
         tableList.clear();
         tableList.load();

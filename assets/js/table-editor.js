@@ -12,6 +12,8 @@ class TableEditor
         // initialize table editor variables
         this.rows = [];
         this.tableData = {};
+        this.tableData.columns = {};
+        this.tableId = '';
 
         // constructs the node
         this.node_ = document.getElementById('table-editor-import')
@@ -24,9 +26,8 @@ class TableEditor
         this.tableName_ = this.node_.querySelector('#table-name');
         this.tablePath_ = this.node_.querySelector('#table-path');
 
-        // when a change occurs in the inputs, update table data
-        this.tableName_.addEventListener('change', () => this.tableData.name = this.tableName_.value);
-        this.tablePath_.addEventListener('change', () => this.tableData.path = this.tablePath_.value);
+        // when a change occurs in the table name input, update table data
+        this.tableName_.addEventListener('change', () => { this.tableData.name = this.tableName_.value; this.nameChange = true; } );
     }
 
 
@@ -42,10 +43,8 @@ class TableEditor
 
     load(id)
     {
-        const name = id.substring(17);
-
         // load the table data based on the id of the table
-        if (name) storage.get(name, (error, data) =>
+        storage.get(id, (error, data) =>
         {
             // set the input values to the table values
             this.tableName_.value = data.name;
@@ -68,19 +67,44 @@ class TableEditor
                 }
             });
 
+            // set the data table variable to the data loaded from storage
             this.tableData = data;
-
+            this.tableId = id;
         });
+    }
+
+
+    add(id)
+    {
+        // sets the table id to the new table id
+        this.tableId = id;
+
+        // creates a new json object in storage for the new table
+        storage.set(id, {name: '', path: '', columns: {}}, (error) => {});
+    }
+
+    // TODO: add ability to delete tables
+    delete(id)
+    {
+
     }
 
 
     save()
     {
+        // sets the columns to empty before saving
+        this.tableData.columns = {};
+
+        // for each column add the column info to the column dictionary
         for (const i of this.rows)
         {
             this.tableData.columns[i.name] = i.type;
         }
-        storage.set(this.tableData.name, this.tableData, (error) => { if (error) throw error; });
+
+        // set the storage
+        storage.set(this.tableId, this.tableData, (error) => {
+            return !error;
+        });
     }
 
 
@@ -88,7 +112,7 @@ class TableEditor
     {
         // sets the value to the file path
         this.tablePath_.value = dialog.showOpenDialog({
-            properties: ['openFile', 'openDirectory'],
+            properties: ['openFile'],
             filters: [{name: 'CSV', extensions: ['csv']}]
         })[0];
 
@@ -97,6 +121,21 @@ class TableEditor
 
         // updates the table data object with the selected CSV
         this.tableData.path = this.tablePath_.value;
+
+        // clears rows if they exist
+        this.rows.forEach( (row) => { row.clear(); });
+
+        // reads the first line of the csv file at the path variable
+        firstLine(this.tableData.path).then( (value) =>
+        {
+            // format the first line read from the csv file
+            const columnNames = value.replace(/['"]+/g, '').split(',');
+
+            for (const i of columnNames)
+            {
+                this.rows.push(new TableEditorRow(i, this.tableData.columns[i] ? this.tableData.columns[i] : 'blob'));
+            }
+        });
     }
 
 
@@ -114,9 +153,6 @@ class TableEditor
         this.tablePath_.parentNode.classList.remove('is-dirty');
 
         this.rows = [];
-        this.tableData = {};
-
-        // clears the
         this.tableData = {};
     }
 

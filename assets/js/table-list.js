@@ -31,7 +31,7 @@ class TableList
         {
             for (const i in data)
             {
-                this.rows.push(new TableListRow(data[i].name, data[i].path));
+                this.rows.push(new TableListRow('table-' + this.rows.length , data[i].name, data[i].path));
             }
 
         });
@@ -45,13 +45,19 @@ class TableList
         this.rows = [];
 
     }
+
+    export()
+    {
+
+    }
 }
 
 class TableListRow
 {
 
-    constructor(name, path)
+    constructor(id, name, path)
     {
+        this.id = id;
         this.name = name;
         this.path = path;
 
@@ -62,7 +68,7 @@ class TableListRow
             .content.querySelector('tr'), true);
 
         // add an id to the node
-        this.node_.id = 'table-list--row--' + this.name;
+        this.node_.id = this.id;
 
         // sets the inner text of the data entries to the values loaded from storage
         this.node_.querySelector('.table-list--row-name').innerText = this.name;
