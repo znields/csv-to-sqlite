@@ -4601,6 +4601,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+material-design-icons-iconfont@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-3.0.3.tgz#154a1084047d4e27237fa7f5a37e1075ceea6df2"
+
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -7205,6 +7209,10 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.3.3:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
+
+vuetify@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.1.8.tgz#3aef842ddc9b7ec348e7ce273a24f2f8ebb1cea9"
 
 vuex@^2.3.1:
   version "2.5.0"
