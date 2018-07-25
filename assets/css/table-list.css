@@ -1,0 +1,11 @@
+#export-button {
+    bottom: 6rem;
+    right: 1rem;
+    position: fixed;
+}
+
+#add-button {
+    bottom: 1rem;
+    right: 1rem;
+    position: fixed;
+}
