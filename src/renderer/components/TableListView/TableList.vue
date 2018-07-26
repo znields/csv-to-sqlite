@@ -6,7 +6,7 @@
       <td>{{ props.index }}</td>
       <td>{{ props.item.name }}</td>
       <td>{{ props.item.path }}</td>
-      <td class="">
+      <td>
         <v-icon @click="editTable(props.index)">edit</v-icon>
         <v-icon @click="deleteTable(props.index)">delete</v-icon>
       </td>
@@ -23,9 +23,9 @@
     data () {
       return {
         headers: [
-          {text: 'ID', value: 'id'},
-          {text: 'Name', value: 'name'},
-          {text: 'Path', value: 'path'},
+          {text: 'ID', value: 'id', sortable: false},
+          {text: 'Table Name', value: 'name', sortable: false},
+          {text: 'Path to CSV', value: 'path', sortable: false},
           {text: '', value: '', sortable: false}
         ]
       }
@@ -33,7 +33,7 @@
     computed: {
       tables: {
         get () {
-          return this.$store.state.Tables.tables
+          return this.$store.getters.tables
         }
       }
     },
@@ -42,6 +42,7 @@
         this.$store.commit('DELETE_TABLE', {id: id})
       },
       editTable (id) {
+        this.$router.push({ name: 'table-editor-view', params: { id: id }})
       }
     }
   }

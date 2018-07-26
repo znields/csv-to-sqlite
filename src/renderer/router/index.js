@@ -11,8 +11,9 @@ export default new Router({
       component: require('@/components/TableListView').default
     },
     {
-      path: '*',
-      redirect: '/'
+      path: '/editor/:id',
+      name: 'table-editor-view',
+      component: require('@/components/TableEditorView').default
     }
   ]
 })

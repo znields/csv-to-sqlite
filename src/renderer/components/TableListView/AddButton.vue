@@ -17,7 +17,8 @@
     name: "AddButton",
     methods: {
       add() {
-        this.$store.commit('ADD_TABLE', {name: '',path: ''})
+        this.$store.commit('ADD_TABLE', {name: '', path: ''})
+        this.$router.push({ name: 'table-editor-view', params: { id: this.$store.getters.nextId }})
       }
     }
   }
