@@ -21,7 +21,7 @@
       choose () {
         const path = this.$electron.remote.dialog.showOpenDialog({
             filters: [{name: 'CSV', extensions: ['csv']}],
-            properties: ['openFile', 'openDirectory']
+            properties: ['openFile']
         })
         if (path) {
           this.path = path[0]

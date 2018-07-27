@@ -13,7 +13,7 @@
           return this.$store.getters.name(this.$route.params.id)
         },
         set (name) {
-          this.$store.commit('UPDATE_NAME', {id: this.$route.params.id, name: name})
+          this.$store.commit('UPDATE_NAME', {id: this.$route.params.id, name: name.replace(/\s/g, '')})
         }
       }
     }

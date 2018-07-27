@@ -17,7 +17,7 @@
     name: "ExportButton",
     methods: {
       export_ () {
-        this.$store.dispatch('export_', {name: 'Test', path: '/Users/inields/Downloads/data3.db'})
+        this.$store.dispatch('export_', {name: 'Test', path: 'C:/Users/imnie/Desktop/data3.db'})
       }
     }
   }

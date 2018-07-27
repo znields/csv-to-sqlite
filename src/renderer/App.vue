@@ -28,6 +28,7 @@
 
   body {
     font-family: Roboto, sans-serif;
+    overflow: hidden;
   }
 
 </style>
