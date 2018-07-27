@@ -1,24 +1,32 @@
 <template>
 
-  <v-app id="app">
+    <div>
 
-    <toolbar></toolbar>
+      <v-app id="app">
 
-    <v-content>
+        <toolbar></toolbar>
 
-        <router-view></router-view>
+        <v-content>
 
-    </v-content>
+            <router-view></router-view>
 
-  </v-app>
+        </v-content>
+
+        </v-app>
+
+        <loading></loading>
+
+    </div>
+
 
 </template>
 
 <script>
   import Toolbar from "./components/Toolbar";
+  import Loading from "./components/Loading";
   export default {
     name: 'csv-to-sqlite',
-    components: {Toolbar}
+    components: {Loading, Toolbar}
   }
 </script>
 

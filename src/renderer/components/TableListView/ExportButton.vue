@@ -8,6 +8,7 @@
 
     </v-btn>
 
+
   </div>
 
 </template>
@@ -15,9 +16,17 @@
 <script>
   export default {
     name: "ExportButton",
+    data () {
+      return {
+        loading: false
+      }
+    },
     methods: {
       export_ () {
-        this.$store.dispatch('export_', {name: 'Test', path: '/Users/inields/Downloads/data3.db'})
+        this.$root.$children[0].$children[1].loading = true
+        this.$store.dispatch('export_', {name: 'Test', path: '/Users/inields/Downloads/data3.db'}).then( () => {
+          this.$root.$children[0].$children[1].loading = false
+        })
       }
     }
   }

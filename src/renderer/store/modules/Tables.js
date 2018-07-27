@@ -1,9 +1,7 @@
 const state = {
   tables: [
-    {name: 'Test', path: '/Users/inields/Downloads/data3.csv'}
   ],
   columns: [
-    {}, {}
   ]
 }
 
@@ -81,12 +79,13 @@ const actions = {
       db.serialize(() => {
         let tables = this.getters.tables
         for (let i in tables) {
-          let columns = this.getters.columns(i)
-          db.run('DROP TABLE IF EXISTS ' + tables[i].name)
-          db.run('CREATE TABLE ' + tables[i].name + ' (' +
-            columns.map((column) => column.name + ' ' + column.type).join(',') + ')')
-          let stream = this.$fs.createReadStream(tables[i].path);
-          let csvStream = this.$csv({headers: true})
+          this.dispatch('loadColumns', {id: i}).then(() => {
+            let columns = this.getters.columns(i)
+            db.run('DROP TABLE IF EXISTS ' + tables[i].name)
+            db.run('CREATE TABLE ' + tables[i].name + ' (' +
+              columns.map((column) => column.name + ' ' + column.type).join(',') + ')')
+            let stream = this.$fs.createReadStream(tables[i].path);
+            let csvStream = this.$csv({headers: true})
               .on("data", function(data) {
                 db.run('INSERT INTO ' + tables[i].name + ' VALUES ' + '(' + columns.map(() => '? ').join(',') + ')',
                   Object.keys(data).map((key) => { return data[key] }))
@@ -94,7 +93,8 @@ const actions = {
               .on("end", function() {
                 resolve()
               });
-          stream.pipe(csvStream);
+            stream.pipe(csvStream);
+          })
         }
       })
     })
