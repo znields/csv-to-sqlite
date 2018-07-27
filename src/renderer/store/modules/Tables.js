@@ -1,7 +1,6 @@
 const state = {
   tables: [
-    {name: 'TableName', path: '/Users/inields/Downloads/data3.csv'},
-    {name: 'TableName', path: '/Users/inields/Downloads/data1.csv'}
+    {name: 'Test', path: '/Users/inields/Downloads/data3.csv'}
   ],
   columns: [
     {}, {}
@@ -74,6 +73,53 @@ const actions = {
         context.commit('UPDATE_COLUMNS', {id: id, columns: columns})
         resolve()
       }).catch((e) => {reject(e)})
+    })
+  },
+  export_ (context, {path}) {
+    let db = new this.$sqlite3.Database(path)
+    return new Promise( (resolve, reject) =>
+    {
+      db.serialize(() => {
+        // gets the list of tables from state
+        let tables = this.getters.tables
+
+        // iterates over the tables
+        for (let i in tables)
+        {
+          db.run('DROP TABLE IF EXISTS ' + tables[i].name)
+
+          // sets up initial variables for creating database
+          let Q = ''
+          let CQ = ''
+          let CI = []
+          let columns = this.getters.columns(i)
+
+          // iterate over the columns in the table
+          for (let column of columns)
+          {
+            Q += '?, '
+            CQ += column.name + ' ' + column.type + ', '
+            CI.push()
+          }
+          CQ = CQ.substring(0, CQ.length - 2)
+          Q = Q.substring(0, Q.length - 2)
+
+          db.run('CREATE TABLE ' + tables[i].name + ' (' + CQ + ')')
+
+          let placeholders = '(' + columns.map(() => '? ').join(',') + ')'
+
+          let stream = this.$fs.createReadStream(tables[i].path);
+          let csvStream = this.$csv()
+              .on("data", function(data) {
+                db.run('INSERT INTO ' + tables[i].name + ' VALUES ' + placeholders, data)
+              })
+              .on("end", function() {
+                resolve()
+              });
+
+          stream.pipe(csvStream);
+        }
+      })
     })
   }
 }

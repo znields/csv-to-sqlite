@@ -11,6 +11,9 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 store.$firstline = firstline
+store.$sqlite3 = require('sqlite3').verbose()
+store.$csv = require('fast-csv')
+store.$fs = require('fs')
 
 Vue.use(Vuetify)
 
