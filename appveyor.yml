@@ -20,10 +20,10 @@ init:
 install:
   - ps: Install-Product node 8 x64
   - git reset --hard HEAD
-  - yarn
+  - npm
   - node --version
 
 build_script:
-  - yarn build
+  - npm build
 
 test: off

@@ -36,7 +36,10 @@
 
   body {
     font-family: Roboto, sans-serif;
-    overflow: hidden;
+  }
+
+  ::-webkit-scrollbar {
+      display: none;
   }
 
 </style>

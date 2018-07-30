@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "Isaiah Nields <imnields@gmail.com>",
   "description": "An electron app to create SQLite databases from CSV files!",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -17,7 +17,7 @@
     "postinstall": "install-app-deps"
   },
   "build": {
-    "productName": "csv-to-sqlite",
+    "productName": "CSV to SQLite",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
