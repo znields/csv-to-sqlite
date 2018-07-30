@@ -7,7 +7,8 @@
 
 ## Table of Contents
 
-[Purpose](#purpose)<br/>
+[Purpose](#purpose)
+
 [Compatibility](#compatibility)<br/>
 [Setup](#setup)<br/>
 [Functionality](#functionality)<br/>
