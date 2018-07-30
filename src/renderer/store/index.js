@@ -2,11 +2,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import modules from './modules'
-import createPersistedState from 'vuex-persistedstate'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
+
 export default new Vuex.Store({
   modules,
-  strict: process.env.NODE_ENV !== 'production'
+  strict: process.env.NODE_ENV !== 'production',
+  plugins: [vuexLocal.plugin]
 })

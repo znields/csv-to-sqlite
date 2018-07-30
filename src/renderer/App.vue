@@ -23,7 +23,7 @@
 
 <script>
   import Toolbar from "./components/Toolbar";
-  import Loading from "./components/Loading";
+  import Loading from "./components/TableListView/Exporting";
   export default {
     name: 'csv-to-sqlite',
     components: {Loading, Toolbar}

@@ -20,12 +20,12 @@
     methods: {
       choose () {
         const path = this.$electron.remote.dialog.showOpenDialog({
-            filters: [{name: 'CSV', extensions: ['csv']}],
-            properties: ['openFile']
+          filters: [{name: 'CSV', extensions: ['csv']}],
+          properties: ['openFile']
         })
         if (path) {
           this.path = path[0]
-          this.$parent.$children[2].loadColumns()
+          this.$parent.$children[2].loadColumns() // FIXME: pass method in as prop
         }
       }
     }

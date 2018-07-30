@@ -1,7 +1,7 @@
 const state = {
-  tables: [
-  ],
   columns: [
+  ],
+  tables: [
   ]
 }
 
@@ -76,27 +76,34 @@ const actions = {
   export_ (context, {path}) {
     let db = new this.$sqlite3.Database(path)
     return new Promise( (resolve, reject) => {
-      db.serialize(() => {
         let tables = this.getters.tables
+        let tablesLeft = tables.length
         for (let i in tables) {
-          this.dispatch('loadColumns', {id: i}).then(() => {
-            let columns = this.getters.columns(i)
+          db.serialize(() => {
             db.run('DROP TABLE IF EXISTS ' + tables[i].name)
-            db.run('CREATE TABLE ' + tables[i].name + ' (' +
-              columns.map((column) => column.name + ' ' + column.type).join(',') + ')')
-            let stream = this.$fs.createReadStream(tables[i].path);
-            let csvStream = this.$csv({headers: true})
-              .on("data", function(data) {
-                db.run('INSERT INTO ' + tables[i].name + ' VALUES ' + '(' + columns.map(() => '? ').join(',') + ')',
-                  Object.keys(data).map((key) => { return data[key] }))
-              })
-              .on("end", function() {
-                resolve()
-              });
-            stream.pipe(csvStream);
-          })
-        }
-      })
+            this.dispatch('loadColumns', {id: i}).then(() => {
+              setTimeout(() => {
+                let columns = this.getters.columns(i)
+                db.run('CREATE TABLE ' + tables[i].name + ' (' +
+                  columns.map((column) => column.name + ' ' + column.type).join(',') + ')')
+                let stream = this.$fs.createReadStream(tables[i].path);
+                let csvStream = this.$csv({headers: true})
+                  .on("data", function(data) {
+                    db.run('INSERT INTO ' + tables[i].name + ' VALUES ' + '(' + columns.map(() => '? ').join(',') + ')',
+                      Object.keys(data).map((key) => { return data[key] }))
+                  })
+                  .on("end", function() {
+                    tablesLeft--
+                    if (!tablesLeft) {
+                      resolve()
+                      db.close()
+                    }
+                  });
+                stream.pipe(csvStream)
+            }, 100)
+          }).catch(e => reject(e))
+        })
+      }
     })
   }
 }
