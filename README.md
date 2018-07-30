@@ -1,6 +1,7 @@
 # <img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/build/icons/icon.png" width="48"> CSV to SQLite
 
 > An electron app to create SQLite databases from CSV files!
+
 ![Build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
