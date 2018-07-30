@@ -15,6 +15,11 @@
           <v-btn color="white" flat @click="error = false">Close</v-btn>
       </v-snackbar>
 
+      <v-snackbar v-model="success" bottom color="green">
+          Database successfully exported!
+          <v-btn color="white" flat @click="success = false">Close</v-btn>
+      </v-snackbar>
+
   </div>
 
 </template>
@@ -28,7 +33,8 @@
       return {
         exporting: false,
         error: false,
-        errorText: ''
+        errorText: '',
+        success: false,
       }
     },
     methods: {
@@ -44,6 +50,8 @@
           this.exporting = true
           this.$store.dispatch('export_', {path: path}).then( () => {
             this.exporting = false
+          }).then(() => {
+            this.success = true
           }).catch((text) => {
             this.errorText = text.toString()
             this.exporting = false
