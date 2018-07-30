@@ -4,18 +4,7 @@
 
 #### Build Setup
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:9080
-npm run dev
-
-# build electron application for production
-npm run build
-
-
-```
 
 #  Search Queue
 > A queue for searching the web!
@@ -44,7 +33,18 @@ npm run build
 
 ## Setup
 
+``` bash
+# install dependencies
+npm install
 
+# serve with hot reload at localhost:9080
+npm run dev
+
+# build electron application for production
+npm run build
+
+
+```
 
 ## Functionality
 
