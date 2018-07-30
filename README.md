@@ -8,11 +8,11 @@
 ## Table of Contents
 
 [Purpose](#purpose)<br>
-[Compatibility](#compatibility)<br/>
-[Setup](#setup)<br/>
-[Functionality](#functionality)<br/>
-[Use Cases](#use-cases)<br/>
-[Future Goals](#future-goals)<br/>
+[Compatibility](#compatibility)<br>
+[Setup](#setup)<br>
+[Functionality](#functionality)<br>
+[Use Cases](#use-cases)<br>
+[Future Goals](#future-goals)<br>
 
 ## Purpose
 
