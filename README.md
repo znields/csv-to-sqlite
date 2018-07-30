@@ -3,7 +3,7 @@
 > An electron app to create SQLite databases from CSV files.
 
 ![Build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![GitHub package version](https://img.shields.io/github/package-json/v/badges/shields.svg)
+![GitHub package version](https://img.shields.io/github/package-json/v/isaiahnields/csv-to-sqlite.svg)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
 ## Table of Contents
@@ -11,8 +11,6 @@
 [Purpose](#purpose)<br>
 [Compatibility](#compatibility)<br>
 [Setup](#setup)<br>
-[Functionality](#functionality)<br>
-[Use Cases](#use-cases)<br>
 [Future Goals](#future-goals)<br>
 
 
@@ -39,14 +37,6 @@ npm run dev
 # build electron application for production
 npm run build
 ```
-
-## Functionality
-
-
-
-## Use Cases
-
-
 
 ## Future Goals
 
