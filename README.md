@@ -42,7 +42,7 @@ npm run build
 ## Screenshots
 
 <img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/table-list.png">
-<img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/editor-list.png">
+<img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/table-editor.png">
 <img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/exporting.png">
 
 
