@@ -13,7 +13,6 @@
 [Functionality](#functionality)<br/>
 [Use Cases](#use-cases)<br/>
 [Future Goals](#future-goals)<br/>
-[Acknowledgements](#acknowledgements)<br/>
 
 ## Purpose
 
