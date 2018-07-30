@@ -1,6 +1,6 @@
 <template>
 
-  <v-text-field solo readonly :value="path()" @click="choose" label="Path to CSV" append-icon="attach_file"></v-text-field>
+  <v-text-field solo readonly :value="path()" @click="choose" @click:prepend-inner="choose" prepend-inner-icon="attach_file"></v-text-field>
 
 </template>
 
