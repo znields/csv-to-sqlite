@@ -17,7 +17,7 @@ npm run build
 
 ```
 
-# <img src="https://raw.githubusercontent.com/isaiahnields/SearchQueue/master/resources/images/icon.png" width="24"> Search Queue
+# <img src="https://raw.githubusercontent.com/isaiahnields/search-queue/master/resources/images/icon.png" width="24"> Search Queue
 > A queue for searching the web!
 
 
