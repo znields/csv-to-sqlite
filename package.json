@@ -2,7 +2,7 @@
   "name": "csv-to-sqlite",
   "version": "1.0.0",
   "author": "Isaiah Nields <imnields@gmail.com>",
-  "description": "An electron app to create SQLite databases from CSV files.",
+  "description": "Convert CSV files to SQLite databases!",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
