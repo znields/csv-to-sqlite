@@ -8,4 +8,5 @@ npm-debug.log
 npm-debug.log.*
 thumbs.db
 !.gitkeep
-.idea/workspace.xml
+.idea/*
+.DS_Store
