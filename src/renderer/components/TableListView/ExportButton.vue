@@ -11,13 +11,13 @@
     <exporting :dialog="exporting"></exporting>
 
       <v-snackbar v-model="error" bottom color="error">
+          <v-icon>error</v-icon>
           {{ errorText }}
-          <v-btn color="white" flat @click="error = false">Close</v-btn>
       </v-snackbar>
 
       <v-snackbar v-model="success" bottom color="green">
+          <v-icon>check</v-icon>
           Database successfully exported!
-          <v-btn color="white" flat @click="success = false">Close</v-btn>
       </v-snackbar>
 
   </div>
@@ -52,8 +52,8 @@
             this.exporting = false
           }).then(() => {
             this.success = true
-          }).catch((text) => {
-            this.errorText = text.toString()
+          }).catch((e) => {
+            this.errorText = e.toString()
             this.exporting = false
             this.error = true
           })
