@@ -11,6 +11,7 @@
 [Purpose](#purpose)<br>
 [Compatibility](#compatibility)<br>
 [Setup](#setup)<br>
+[Screenshots](#screenshots)<br>
 [Future Goals](#future-goals)<br>
 
 
@@ -37,6 +38,13 @@ npm run dev
 # build electron application for production
 npm run build
 ```
+
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/table-list.png">
+<img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/editor-list.png">
+<img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/docs/exporting.png">
+
 
 ## Future Goals
 
