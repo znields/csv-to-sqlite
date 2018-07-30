@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/build/icons/icon.png" width="24"> CSV to SQLite
+# <img src="https://raw.githubusercontent.com/isaiahnields/csv-to-sqlite/master/build/icons/icon.png" width="48"> CSV to SQLite
 
 > An electron app to create SQLite databases from CSV files!
 
