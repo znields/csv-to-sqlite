@@ -10,18 +10,11 @@
 
 [Purpose](#purpose)<br>
 [Compatibility](#compatibility)<br>
-<<<<<<< HEAD
-[Setup](#setup)<br/>
-[Functionality](#functionality)<br>
-[Use Cases](#use-cases)<br>
-[Future Goals](#future-goals)<br>
-[Acknowledgements](#acknowledgements)<br>
-=======
 [Setup](#setup)<br>
 [Functionality](#functionality)<br>
 [Use Cases](#use-cases)<br>
 [Future Goals](#future-goals)<br>
->>>>>>> 74278866603911d8a5efbc3ddc1ddd6e1b1e8ea9
+
 
 ## Purpose
 
