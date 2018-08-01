@@ -5,7 +5,7 @@
 ![Build passing](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![GitHub package version](https://img.shields.io/github/package-json/v/isaiahnields/csv-to-sqlite.svg)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)]()
-![Downloads](https://img.shields.io/github/downloads/atom/atom/total.svg)
+![Downloads](https://img.shields.io/github/downloads/isaiahnields/csv-to-sqlite/total.svg)
 
 ## Table of Contents
 
