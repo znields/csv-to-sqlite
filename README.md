@@ -3,7 +3,7 @@
 > A desktop app to convert CSV files to SQLite databases!
 
 [![Version](https://img.shields.io/github/package-json/v/isaiahnields/csv-to-sqlite.svg)](https://github.com/isaiahnields/csv-to-sqlite/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/isaiahnields/csv-to-sqlite/total.svg)]()
+[![Downloads](https://img.shields.io/github/downloads/isaiahnields/csv-to-sqlite/total.svg)](https://github.com/isaiahnields/csv-to-sqlite/releases/latest)
 [![License](https://img.shields.io/github/license/isaiahnields/csv-to-sqlite.svg)](https://github.com/isaiahnields/csv-to-sqlite/blob/master/LICENSE)
 
 
